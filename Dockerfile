@@ -1,6 +1,5 @@
 # Define Ruby, Rails, and Node.js versions as build arguments with default values
 ARG RUBY_VERSION=3.4.1
-ARG RAILS_VERSION=8.0.1
 ARG NODE_VERSION=22.13.0
 
 # Base image: Official Ruby image with the specified version
@@ -32,9 +31,9 @@ ENV BUNDLE_DEPLOYMENT="1" \
   BUNDLE_FROZEN="1"
 
 # Install Rails and clean up Bundler cache
-ARG RAILS_VERSION
-RUN gem install rails -v ${RAILS_VERSION} && \
-  rm -rf /usr/local/bundle/cache /usr/src
+COPY Gemfile Gemfile.lock ./
+RUN bundle install && \
+  rm -rf /usr/local/bundle/cache
 
 # Default command
 CMD ["irb"]
