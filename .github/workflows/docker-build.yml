@@ -22,12 +22,16 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build Docker image
-        run: |
-          docker build \
-            --build-arg RUBY_VERSION=3.4.1 \
-            --build-arg RAILS_VERSION=8.0.1 \
-            --build-arg NODE_VERSION=22.13.0 \
-            -t $IMAGE_NAME:latest .
-      - name: Push Docker image
-        run: docker push $IMAGE_NAME:latest
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build and Push Multi-Platform Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ env.IMAGE_NAME }}:latest
+          build-args: |-
+            RUBY_VERSION=3.4.1
+            RAILS_VERSION=8.0.1
+            NODE_VERSION=22.13.0
