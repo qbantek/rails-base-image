@@ -22,7 +22,7 @@ RUN apt-get update -qq && \
 
 # Install Node.js and Yarn
 ARG NODE_VERSION
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION%%.*}.x | bash - && \
   apt-get install --no-install-recommends -y \
   nodejs && \
   npm install -g yarn && \
