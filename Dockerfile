@@ -22,14 +22,16 @@ RUN apt-get update -qq && \
 
 # Install Node.js and Yarn
 ARG NODE_VERSION
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION%%.*}.x | bash - && \
   apt-get install --no-install-recommends -y \
   nodejs && \
   npm install -g yarn && \
   rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Set environment variables for Bundler
-ENV BUNDLE_DEPLOYMENT="1" \
+# Set production environment variables for Bundler and Rails
+ENV RAILS_ENV="production" \
+  RACK_ENV="production" \
+  BUNDLE_DEPLOYMENT="1" \
   BUNDLE_PATH="/usr/local/bundle" \
   BUNDLE_WITHOUT="development test" \
   BUNDLE_JOBS=4 \
