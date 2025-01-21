@@ -38,10 +38,16 @@ ENV RAILS_ENV="production" \
   BUNDLE_RETRY=3 \
   BUNDLE_FROZEN="1"
 
+# Configure Bundler and RubyGems to skip documentation
+RUN bundle config set no-doc true && \
+  echo 'gem: --no-document' > /usr/local/etc/gemrc
+
 # Install Rails and clean up Bundler cache
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
-  rm -rf ~/.bundle/ "${BUNDLE_PATH}/ruby/*/cache" "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git"
+  rm -rf ~/.bundle/ \
+  "${BUNDLE_PATH}/ruby/*/cache" \
+  "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git"
 
 # Default command
 CMD ["irb"]
