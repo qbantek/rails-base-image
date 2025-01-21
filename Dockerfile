@@ -8,19 +8,25 @@ FROM ruby:${RUBY_VERSION}-slim
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies for Rails, native extensions, and Node.js
-ARG NODE_VERSION
+# Install base runtime dependencies
 RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y \
   build-essential \
-  libpq-dev \
   curl \
-  git && \
-  curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION%.*}.x | bash - && \
+  git \
+  libjemalloc2 \
+  node-gyp \
+  pkg-config \
+  python-is-python3 && \
+  rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install Node.js and Yarn
+ARG NODE_VERSION
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
   apt-get install --no-install-recommends -y \
-  nodejs \
-  yarn && \
-  rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+  nodejs && \
+  npm install -g yarn && \
+  rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set environment variables for Bundler
 ENV BUNDLE_DEPLOYMENT="1" \
@@ -33,7 +39,7 @@ ENV BUNDLE_DEPLOYMENT="1" \
 # Install Rails and clean up Bundler cache
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
-  rm -rf /usr/local/bundle/cache
+  rm -rf ~/.bundle/ "${BUNDLE_PATH}/ruby/*/cache" "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git"
 
 # Default command
 CMD ["irb"]
