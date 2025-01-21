@@ -35,3 +35,5 @@ jobs:
             RUBY_VERSION=3.4.1
             RAILS_VERSION=8.0.1
             NODE_VERSION=22.13.0
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
