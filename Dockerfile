@@ -45,8 +45,7 @@ RUN bundle config set no-doc true && \
 
 # Install Rails and clean up Bundler cache
 COPY Gemfile Gemfile.lock ./
-RUN bundle config set force_ruby_platform true && \
-  bundle install --jobs 4 && \
+RUN bundle install --jobs 4 && \
   rm -rf ~/.bundle/ \
   "${BUNDLE_PATH}/ruby/*/cache" \
   "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git"
