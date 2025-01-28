@@ -6,6 +6,7 @@ gem "rails", "8.0.1"
 gem "puma", "6.5.0"
 gem "bootsnap", "1.18.4"
 gem "propshaft", "1.1.0"
+gem "racc", "1.8.1"
 
 # Hotwire
 gem "turbo-rails", "2.0.11"
