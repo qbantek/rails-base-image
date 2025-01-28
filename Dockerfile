@@ -17,7 +17,8 @@ RUN apt-get update -qq && \
   libjemalloc2 \
   node-gyp \
   pkg-config \
-  python-is-python3 && \
+  python-is-python3 \
+  libyaml-dev && \
   rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install Node.js and Yarn
@@ -44,7 +45,8 @@ RUN bundle config set no-doc true && \
 
 # Install Rails and clean up Bundler cache
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
+RUN bundle config set force_ruby_platform true && \
+  bundle install --jobs 4 && \
   rm -rf ~/.bundle/ \
   "${BUNDLE_PATH}/ruby/*/cache" \
   "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git"
