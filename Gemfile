@@ -3,7 +3,7 @@ source "https://rubygems.org"
 
 # Core Rails dependencies
 gem "bootsnap", "1.18.4"
-gem "cssbundling-rails", "1.4.1"
+gem "cssbundling-rails", "1.4.2"
 gem "irb", "1.15.1"
 gem "jsbundling-rails", "1.3.1"
 gem "net-imap", "0.5.6"
