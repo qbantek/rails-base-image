@@ -16,7 +16,7 @@ gem "rack", "3.1.10"
 gem "rails", "8.0.1"
 
 # Hotwire
-gem "turbo-rails", "2.0.11"
+gem "turbo-rails", "2.0.13"
 gem "stimulus-rails", "1.3.4"
 
 # Utilities
