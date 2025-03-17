@@ -13,7 +13,7 @@ gem "propshaft", "1.1.0"
 gem "puma", "6.6.0"
 gem "racc", "1.8.1"
 gem "rack", "3.1.12"
-gem "rails", "8.0.1"
+gem "rails", "8.0.2"
 
 # Hotwire
 gem "turbo-rails", "2.0.13"
