@@ -23,7 +23,7 @@ gem "stimulus-rails", "1.3.4"
 gem "amazing_print", "1.7.2"
 gem "bootstrap_form", "5.4"
 gem "meta-tags", "2.22.1"
-gem "faraday", "2.12.2"
+gem "faraday", "2.13.1"
 gem "rails_semantic_logger", "4.17.0"
 
 # GCP
