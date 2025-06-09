@@ -12,7 +12,7 @@ gem "nokogiri", "1.18.6"
 gem "propshaft", "1.1.0"
 gem "puma", "6.6.0"
 gem "racc", "1.8.1"
-gem "rack", "3.1.12"
+gem "rack", "3.1.16"
 gem "rails", "8.0.2"
 
 # Hotwire
