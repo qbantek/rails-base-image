@@ -2,7 +2,7 @@
 source "https://rubygems.org"
 
 # Core Rails dependencies
-gem "bootsnap", "1.18.4"
+gem "bootsnap", "1.18.6"
 gem "cssbundling-rails", "1.4.3"
 gem "irb", "1.15.2"
 gem "jsbundling-rails", "1.3.1"
