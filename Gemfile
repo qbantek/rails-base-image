@@ -28,5 +28,5 @@ gem "rails_semantic_logger", "4.17.0"
 
 # GCP
 gem "cloudenvoy", "0.6.0"
-gem "recaptcha", "5.19"
+gem "recaptcha", "5.20.1"
 
