@@ -19,8 +19,11 @@ To use this image as the base for your Rails applications, reference it in your
 project's `Dockerfile`:
 
 ```dockerfile
-# Use the Rails base image
+# Use the Rails base image (recommended - always latest)
 FROM ghcr.io/qbantek/rails-base-image:latest
+
+# Or pin to a specific version (optional)
+# FROM ghcr.io/qbantek/rails-base-image:3.4.1-22.13.0-8.0.3
 
 # Set working directory
 WORKDIR /app
@@ -37,6 +40,13 @@ EXPOSE 3000
 # Default command
 CMD ["rails", "server", "-b", "0.0.0.0"]
 ```
+
+#### Available Tags
+
+- `:latest` - Always points to the most recent build
+- `:3.4.1-22.13.0-8.0.3` - Pinned to specific Ruby/Node/Rails versions
+
+The versioned tag format is `ruby-node-rails` (e.g., `3.4.1-22.13.0-8.0.3`).
 
 ### Building the Base Image
 
@@ -76,8 +86,19 @@ docker tag rails-base-image ghcr.io/<your-username>/rails-base-image:latest
 docker push ghcr.io/<your-username>/rails-base-image:latest
 ```
 
+## Version Consistency
+
+The GitHub Actions workflow includes automatic validation to ensure version consistency across all configuration files:
+
+- **Ruby version**: Validates `mise.toml` matches workflow environment
+- **Node version**: Validates `mise.toml` matches workflow environment
+- **Rails version**: Validates `Gemfile` matches workflow environment
+
+If versions don't match, the build will fail with clear error messages.
+
 ## Additional Notes
 
 - This image is optimized for production environments.
+- Built for `linux/amd64` platform only.
 - For development environments, consider adding development tools or using a
   different image.

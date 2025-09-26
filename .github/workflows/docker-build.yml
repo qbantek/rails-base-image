@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/rails-base-image
+  RUBY_VERSION: 3.4.1
+  RAILS_VERSION: 8.0.3
+  NODE_VERSION: 22.13.0
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,24 +18,108 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+      
+      - name: Read tool versions from mise.toml
+        id: versions
+        run: |
+          echo "ruby=$(yq -oy -r '.tools.ruby' mise.toml)" >> "$GITHUB_OUTPUT"
+          echo "node=$(yq -oy -r '.tools.node' mise.toml)" >> "$GITHUB_OUTPUT"
+      
+      - name: Extract Rails version from Gemfile
+        id: rails_version
+        run: |
+          echo "rails=$(grep 'gem "rails"' Gemfile | sed 's/gem "rails", "\(.*\)"/\1/')" >> "$GITHUB_OUTPUT"
+      
+      - name: Validate version consistency
+        run: |
+          echo "🔍 Validating version consistency across configuration files..."
+          
+          # Get versions from previous steps
+          RUBY_MISE="${{ steps.versions.outputs.ruby }}"
+          NODE_MISE="${{ steps.versions.outputs.node }}"
+          RAILS_GEMFILE="${{ steps.rails_version.outputs.rails }}"
+          
+          # Workflow versions
+          RUBY_WORKFLOW="${{ env.RUBY_VERSION }}"
+          RAILS_WORKFLOW="${{ env.RAILS_VERSION }}"
+          NODE_WORKFLOW="${{ env.NODE_VERSION }}"
+          
+          echo "📋 Version comparison:"
+          echo "  Ruby:"
+          echo "    mise.toml:     $RUBY_MISE"
+          echo "    workflow:      $RUBY_WORKFLOW"
+          echo "  Rails:"
+          echo "    Gemfile:       $RAILS_GEMFILE"
+          echo "    workflow:      $RAILS_WORKFLOW"
+          echo "  Node:"
+          echo "    mise.toml:     $NODE_MISE"
+          echo "    workflow:      $NODE_WORKFLOW"
+          
+          # Validate Ruby version
+          if [ "$RUBY_MISE" != "$RUBY_WORKFLOW" ]; then
+            echo "❌ Ruby version mismatch!"
+            echo "   mise.toml: $RUBY_MISE"
+            echo "   workflow:  $RUBY_WORKFLOW"
+            exit 1
+          fi
+          
+          # Validate Rails version
+          if [ "$RAILS_GEMFILE" != "$RAILS_WORKFLOW" ]; then
+            echo "❌ Rails version mismatch!"
+            echo "   Gemfile:  $RAILS_GEMFILE"
+            echo "   workflow: $RAILS_WORKFLOW"
+            exit 1
+          fi
+          
+          # Validate Node version (if present in mise.toml)
+          if [ "$NODE_MISE" != "null" ] && [ "$NODE_MISE" != "$NODE_WORKFLOW" ]; then
+            echo "❌ Node version mismatch!"
+            echo "   mise.toml: $NODE_MISE"
+            echo "   workflow:  $NODE_WORKFLOW"
+            exit 1
+          fi
+          
+          echo "✅ All versions are consistent!"
+      
+      - name: Generate version tags
+        id: meta
+        run: |
+          # Generate semantic version tag: ruby-node-rails-version
+          VERSION_TAG="${{ env.RUBY_VERSION }}-${{ env.NODE_VERSION }}-${{ env.RAILS_VERSION }}"
+          
+          # Create tags: latest and versioned
+          TAGS="${{ env.IMAGE_NAME }}:latest,${{ env.IMAGE_NAME }}:$VERSION_TAG"
+          
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+          echo "version_tag=$VERSION_TAG" >> $GITHUB_OUTPUT
+          echo "Generated tags: $TAGS"
+      
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+      
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v6
         with:
           context: .
           platforms: linux/amd64
           push: true
-          tags: ${{ env.IMAGE_NAME }}:latest
+          tags: ${{ steps.meta.outputs.tags }}
           build-args: |-
-            RUBY_VERSION=3.4.1
-            RAILS_VERSION=8.0.1
-            NODE_VERSION=22.13.0
+            RUBY_VERSION=${{ env.RUBY_VERSION }}
+            NODE_VERSION=${{ env.NODE_VERSION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          labels: |
+            org.opencontainers.image.title=Rails Base Image
+            org.opencontainers.image.description=A lightweight Docker base image for Rails applications
+            org.opencontainers.image.version=${{ steps.meta.outputs.version_tag }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.created=${{ github.event.head_commit.timestamp }}
+            org.opencontainers.image.revision=${{ github.sha }}
