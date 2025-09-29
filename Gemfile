@@ -24,7 +24,7 @@ gem "turbo-rails", "2.0.16"
 gem "amazing_print", "1.7.2"
 gem "bootstrap_form", "5.4"
 gem "meta-tags", "2.22.1"
-gem "faraday", "2.13.4"
+gem "faraday", "2.14.0"
 gem "rails_semantic_logger", "4.17.0"
 
 # GCP
