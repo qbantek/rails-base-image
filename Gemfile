@@ -12,7 +12,7 @@ gem "nokogiri", "1.18.9"
 gem "propshaft", "1.2.1"
 gem "puma", "7.0.4"
 gem "racc", "1.8.1"
-gem "rack", "3.2.0"
+gem "rack", "3.2.1"
 gem "rails", "8.0.3"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
