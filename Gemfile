@@ -18,7 +18,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Hotwire
 gem "stimulus-rails", "1.3.4"
-gem "turbo-rails", "2.0.16"
+gem "turbo-rails", "2.0.17"
 
 # Utilities
 gem "amazing_print", "1.7.2"
