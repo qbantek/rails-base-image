@@ -21,7 +21,7 @@ gem "stimulus-rails", "1.3.4"
 gem "turbo-rails", "2.0.17"
 
 # Utilities
-gem "amazing_print", "1.7.2"
+gem "amazing_print", "1.8.1"
 gem "bootstrap_form", "5.4"
 gem "meta-tags", "2.22.1"
 gem "faraday", "2.14.0"

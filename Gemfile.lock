@@ -74,7 +74,7 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    amazing_print (1.7.2)
+    amazing_print (1.8.1)
     base64 (0.3.0)
     benchmark (0.4.1)
     bigdecimal (3.2.3)
@@ -358,7 +358,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  amazing_print (= 1.7.2)
+  amazing_print (= 1.8.1)
   bootsnap (= 1.18.6)
   bootstrap_form (= 5.4)
   cloudenvoy (= 0.6.0)
