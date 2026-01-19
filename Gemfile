@@ -23,7 +23,7 @@ gem "turbo-rails", "2.0.17"
 # Utilities
 gem "amazing_print", "2.0.0"
 gem "bootstrap_form", "5.4"
-gem "meta-tags", "2.22.1"
+gem "meta-tags", "2.22.3"
 gem "faraday", "2.14.0"
 gem "rails_semantic_logger", "4.18.0"
 
