@@ -1,5 +1,5 @@
 # Define Ruby, Rails, and Node.js versions as build arguments with default values
-ARG RUBY_VERSION=3.4.1
+ARG RUBY_VERSION=3.4.7
 ARG NODE_VERSION=22.13.0
 
 # Base image: Official Ruby image with the specified version

@@ -1,11 +1,11 @@
 # Rails Base Image
 
-A lightweight Docker base image for Rails 8 applications with Ruby 3.4.1 and Rails 8.0.1.
+A lightweight Docker base image for Rails 8 applications with Ruby 3.4.7 and Rails 8.1.3.1.
 
 ## Features
 
-- Ruby 3.4.1
-- Rails 8.0.1
+- Ruby 3.4.7
+- Rails 8.1.3.1
 - Pre-installed dependencies for Rails applications
 - Node.js 22.13.0 and Yarn for JavaScript asset management
 
@@ -23,7 +23,7 @@ project's `Dockerfile`:
 FROM ghcr.io/qbantek/rails-base-image:latest
 
 # Or pin to a specific version (optional)
-# FROM ghcr.io/qbantek/rails-base-image:3.4.1-22.13.0-8.0.3
+# FROM ghcr.io/qbantek/rails-base-image:3.4.7-22.13.0-8.1.3.1
 
 # Set working directory
 WORKDIR /app
@@ -44,9 +44,9 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 #### Available Tags
 
 - `:latest` - Always points to the most recent build
-- `:3.4.1-22.13.0-8.0.3` - Pinned to specific Ruby/Node/Rails versions
+- `:3.4.7-22.13.0-8.1.3.1` - Pinned to specific Ruby/Node/Rails versions
 
-The versioned tag format is `ruby-node-rails` (e.g., `3.4.1-22.13.0-8.0.3`).
+The versioned tag format is `ruby-node-rails` (e.g., `3.4.7-22.13.0-8.1.3.1`).
 
 ### Building the Base Image
 
@@ -55,8 +55,8 @@ these steps.
 
 #### Build Arguments
 
-- `RUBY_VERSION`: Ruby version to use (default: `3.4.1`).
-- `RAILS_VERSION`: Rails version to install (default: `8.0.1`).
+- `RUBY_VERSION`: Ruby version to use (default: `3.4.7`).
+- `RAILS_VERSION`: Rails version to install (default: `8.1.3.1`).
 - `NODE_VERSION`: Node.js version to install (default: `22.13.0`).
 
 #### Build Commands
