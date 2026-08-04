@@ -13,7 +13,7 @@ gem "propshaft", "1.3.1"
 gem "puma", "7.2.1"
 gem "racc", "1.8.1"
 gem "rack", "3.2.6"
-gem "rails", "8.0.3"
+gem "rails", "8.1.3.1"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Hotwire
@@ -23,7 +23,7 @@ gem "turbo-rails", "2.0.17"
 # Utilities
 gem "amazing_print", "2.0.0"
 gem "bootstrap_form", "5.4"
-gem "meta-tags", "2.22.1"
+gem "meta-tags", "2.23.0"
 gem "faraday", "2.14.3"
 gem "rails_semantic_logger", "4.18.0"
 
