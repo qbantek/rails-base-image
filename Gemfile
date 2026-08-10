@@ -25,7 +25,7 @@ gem "amazing_print", "2.0.0"
 gem "bootstrap_form", "5.4"
 gem "meta-tags", "2.23.0"
 gem "faraday", "2.14.3"
-gem "rails_semantic_logger", "4.18.0"
+gem "rails_semantic_logger", "5.1.0"
 
 # GCP
 gem "cloudenvoy", "0.6.0"
