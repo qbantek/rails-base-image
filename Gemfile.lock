@@ -80,7 +80,7 @@ GEM
     amazing_print (2.0.0)
     base64 (0.3.0)
     bigdecimal (4.1.2)
-    bootsnap (1.18.6)
+    bootsnap (1.24.6)
       msgpack (~> 1.2)
     bootstrap_form (5.4.0)
       actionpack (>= 6.1)
@@ -365,7 +365,7 @@ PLATFORMS
 
 DEPENDENCIES
   amazing_print (= 2.0.0)
-  bootsnap (= 1.18.6)
+  bootsnap (= 1.24.6)
   bootstrap_form (= 5.4)
   cloudenvoy (= 0.6.0)
   cssbundling-rails (= 1.4.3)
@@ -404,7 +404,7 @@ CHECKSUMS
   amazing_print (2.0.0) sha256=2e36aba46ac78d37ed27ca0e2056afe3583183bb5c64f157c246b267355e5d6a
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
-  bootsnap (1.18.6) sha256=0ae2393c1e911e38be0f24e9173e7be570c3650128251bf06240046f84a07d00
+  bootsnap (1.24.6) sha256=c60bab88c70332290f0a2636a288f675299eb4f804a02a3c085b42eca9da164a
   bootstrap_form (5.4.0) sha256=b0e6c2b4233b746df0590a339f4582bc684b8c530beeba149cc65cb8ad55c832
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
   cloudenvoy (0.6.0) sha256=f248440bdab62d586f3ce513cff676838a965c6881dc5fa856f57d163e0a1189
